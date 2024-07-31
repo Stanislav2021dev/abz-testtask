@@ -1,20 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace 'com.abzagency.testtask'
-    compileSdk 34
+    compileSdk gradleDependencies.compileSdk
 
     defaultConfig {
-        applicationId "com.abzagency.testtask"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        minSdk gradleDependencies.minSdk
+        targetSdk gradleDependencies.targetSdk
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode getVersionCode()
+        versionName "1.0.0"
     }
 
     buildTypes {
@@ -23,17 +24,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.composeCompilerVersion.get().toString()
     }
 }
 
 dependencies {
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.appcompat
-    implementation libs.material
+    // Hilt
+    implementation libs.hiltDependencies.hilt
+    kapt libs.hiltDependencies.kapt
+    implementation libs.hiltDependencies.navigationCompose
+
+    // Jetpack Compose
+    implementation libs.composeDependencies.composeActivity
+    implementation libs.composeDependencies.composeUi
+    implementation libs.composeDependencies.composePreview
+    implementation libs.composeDependencies.composeMaterial3
+    implementation libs.composeDependencies.composeNavigation
+    implementation libs.composeDependencies.runtime
 }
