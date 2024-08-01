@@ -40,6 +40,10 @@ kotlinAndroidPluginVersion = "2.0.0"
 kotlinJvmPluginVersion = "2.0.0"
 androidHiltPluginVersion = "2.50"
 kotlinSerializationPluginVersion = "2.0.0"
+junitVersion = "4.13.2"
+junit = "1.2.1"
+espressoCoreVersion = "3.6.1"
+materialVersion = "1.12.0"
 
 [libraries]
 androidCoreDependencies-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
@@ -71,6 +75,10 @@ composeCoil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilVersion" 
 
 pagingDependencies-core = { module = "androidx.paging:paging-runtime", version.ref = "pagingVersion" }
 pagingDependencies-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingComposeVersion" }
+junit = { group = "junit", name = "junit", version.ref = "junitVersion" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
+material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidApplicationPluginVersion"}

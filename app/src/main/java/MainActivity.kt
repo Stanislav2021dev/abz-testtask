@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.abzagency.testtask.com.abzagency.testtask.ui.theme.TestTaskApplicationTheme
-import com.abzagency.testtask.ui.MainRoute
+import com.abzagency.testtask.com.abzagency.testtask.ui.route.MainRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

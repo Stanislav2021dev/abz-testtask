@@ -8,3 +8,12 @@ pluginManagement {
 
 rootProject.name = "TestTask"
 include ':app'
+include ':features'
+include ':features:splash'
+include ':features:splash:presentation'
+include ':features:signup'
+include ':features:signup:presentation'
+include ':features:users'
+include ':features:users:presentation'
+include ':core'
+include ':core:designsystem'

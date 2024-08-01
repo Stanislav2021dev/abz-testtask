@@ -1,4 +1,4 @@
-package com.abzagency.testtask.ui
+package com.abzagency.features.users.presentation.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,27 +6,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MainRoute() {
-    MainScreen()
+internal fun UsersRoute() {
+    UsersScreen()
 }
 
 @Composable
-fun MainScreen() {
+internal fun UsersScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "TestTask!!"
-        )
+        Text(text = "Users")
     }
 }
 
 @Composable
-@Preview
-fun MainScreenPreview() {
-    MainScreen()
+private fun UsersScreenPreview() {
+    UsersScreen()
 }

@@ -1,0 +1,34 @@
+plugins {
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
+}
+
+android {
+    namespace 'com.abzagency.features.signup.presentation'
+    compileSdk 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.composeCompilerVersion.get().toString()
+    }
+}
+
+dependencies {
+    // Jetpack Compose
+    implementation libs.composeDependencies.composeUi
+    implementation libs.composeDependencies.composePreview
+    implementation libs.composeDependencies.composeMaterial3
+    implementation libs.composeDependencies.composeNavigation
+    implementation libs.composeDependencies.runtime
+}
