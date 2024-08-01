@@ -10,6 +10,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import com.abzagency.core.designsystem.resources.Colors
+import com.abzagency.core.designsystem.resources.backgroundPrimary
 import com.abzagency.testtask.com.abzagency.testtask.ui.theme.TestTaskApplicationTheme
 import com.abzagency.testtask.com.abzagency.testtask.ui.route.MainRoute
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +29,7 @@ class MainActivity: ComponentActivity() {
                         .fillMaxSize()
                         .imePadding()
                         .navigationBarsPadding(),
-                    color = Color.White
+                    color = Colors.backgroundPrimary()
                 ) {
                     MainRoute()
                 }
