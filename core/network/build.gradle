@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+android {
+    namespace 'com.abzagency.core.network'
+    compileSdk 34
+
+    defaultConfig {
+        buildConfigField "String", "BASE_URL", "\"https://frontend-test-assignment-v1/\""
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation libs.kotlinDependencies.core
+    implementation libs.kotlinDependencies.serialization
+
+    // Hilt
+    implementation libs.hiltDependencies.hilt
+    kapt libs.hiltDependencies.kapt
+
+    // Retrofit
+    implementation libs.networkDependencies.retrofit
+    implementation libs.networkDependencies.okHttp
+    implementation libs.networkDependencies.okHttpLogging
+    implementation libs.networkDependencies.kotlinSerialization
+
+    // Local modules
+    implementation project(":core:common")
+}
