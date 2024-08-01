@@ -23,4 +23,11 @@ dependencies {
     implementation libs.kotlinDependencies.core
     implementation libs.kotlinDependencies.lifecycle
     implementation libs.kotlinDependencies.serialization
+
+    // Paging
+    implementation libs.pagingDependencies.core
+
+    // Hilt
+    implementation libs.hiltDependencies.hilt
+    kapt libs.hiltDependencies.kapt
 }

@@ -31,6 +31,7 @@ dependencies {
     implementation libs.composeDependencies.composeMaterial3
     implementation libs.composeDependencies.composeNavigation
     implementation libs.composeDependencies.runtime
+    implementation libs.composeDependencies.composeUiTooling
 
     // Local modules
     implementation project(":core:designsystem")

@@ -13,10 +13,6 @@ import javax.inject.Singleton
 internal object NetworkHiltModule {
     @Singleton
     @Provides
-    fun provideUnauthorizedOkHttpClient(): Retrofit = RetrofitInitializer.createGeneralRetrofitClient()
-
-    @Singleton
-    @Provides
-    fun provideAuthorizedOkHttpClient(
+    fun provideOkHttpClient(
     ): Retrofit = RetrofitInitializer.createGeneralRetrofitClient()
 }

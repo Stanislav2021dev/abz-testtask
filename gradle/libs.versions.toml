@@ -69,6 +69,7 @@ composeDependencies-composePreview = { module = "androidx.compose.ui:ui-tooling-
 composeDependencies-composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3Version" }
 composeDependencies-composeNavigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigationVersion" }
 composeDependencies-runtime = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeRuntimeVersion" }
+composeDependencies-composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeVersion" }
 
 composeCoil-core = { module = "io.coil-kt:coil-compose", version.ref = "coilVersion" }
 composeCoil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilVersion" }

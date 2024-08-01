@@ -2,10 +2,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.compiler)
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.abzagency.features.users.presentation'
+    namespace "${packageName}.features.users.presentation"
     compileSdk 34
 
     compileOptions {
@@ -31,4 +33,23 @@ dependencies {
     implementation libs.composeDependencies.composeMaterial3
     implementation libs.composeDependencies.composeNavigation
     implementation libs.composeDependencies.runtime
+    implementation libs.composeDependencies.composeUiTooling
+
+    // Hilt
+    implementation libs.hiltDependencies.hilt
+    implementation project(':features:users:models:domain')
+
+    kapt libs.hiltDependencies.kapt
+    implementation libs.hiltDependencies.navigationCompose
+
+    // Paging
+    implementation libs.pagingDependencies.core
+    implementation libs.pagingDependencies.compose
+
+    // Local modules
+    implementation project(":core:designsystem")
+    implementation project(":core:common")
+
+    implementation project(":features:users:domain")
+    implementation project(":features:users:models:presentation")
 }

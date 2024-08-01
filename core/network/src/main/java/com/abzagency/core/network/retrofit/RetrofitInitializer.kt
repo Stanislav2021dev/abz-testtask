@@ -1,5 +1,6 @@
 package com.abzagency.core.network.retrofit
 
+import com.abzagency.core.network.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -18,7 +19,7 @@ internal object RetrofitInitializer {
         return Retrofit.Builder()
             .addConverterFactory(createKotlinJsonConvertor())
             .client(createGeneralOkHttpClient())
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL1)
             .build()
     }
 

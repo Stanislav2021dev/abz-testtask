@@ -1,0 +1,10 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+dependencies {
+    // Kotlin serialization
+    implementation libs.kotlinDependencies.serialization
+    implementation project(':features:users:models:domain')
+}

@@ -10,7 +10,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        buildConfigField "String", "BASE_URL", "\"https://frontend-test-assignment-v1/\""
+        buildConfigField "String", "BASE_URL1", "\"https://frontend-test-assignment-api.abz.agency/\""
     }
 
     compileOptions {
