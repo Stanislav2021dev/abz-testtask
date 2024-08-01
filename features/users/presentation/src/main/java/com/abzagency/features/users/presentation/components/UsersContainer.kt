@@ -1,7 +1,10 @@
 package com.abzagency.features.users.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
@@ -17,13 +20,15 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.Dimens
+import com.abzagency.core.designsystem.resources.backgroundPrimary
 import com.abzagency.core.designsystem.resources.secondary
-import com.abzagency.core.designsystem.ui.isScrolledToEnd
+import com.abzagency.core.designsystem.ui.paging.isScrolledToEnd
+import com.abzagency.features.users.models.presentation.UserPresentationModel
 
 @Composable
 fun UsersContainer(
     modifier: Modifier = Modifier,
-    users: LazyPagingItems<String>,
+    users: LazyPagingItems<UserPresentationModel>,
 ) {
     val isLoadingError by remember(users) {
         derivedStateOf { users.loadState.refresh is LoadState.Error }
@@ -48,25 +53,31 @@ fun UsersContainer(
             val isScrolledToEnd by lazyListState.isScrolledToEnd()
 
             LazyColumn(
-                modifier = modifier,
-                verticalArrangement = Arrangement.spacedBy(Dimens.spacingNormal),
+                modifier = modifier.padding(horizontal = Dimens.spacingNormal),
+                verticalArrangement = Arrangement.spacedBy(Dimens.spacingBig),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 contentPadding = PaddingValues(
-                    bottom = Dimens.spacingNormal
+                    bottom = Dimens.bottomBarHeight + Dimens.spacingBig,
+                    top = Dimens.spacingBig
                 ),
                 state = if (isLoading) rememberLazyListState() else lazyListState
             ) {
                 if (isLoading) {
-                    items(4) {
-                        // TODO add shimmers
+                    items(6) {
+                        UserItemShimmers(modifier = Modifier.fillMaxWidth())
                     }
                 } else {
                     if (users.itemSnapshotList.items.isNotEmpty()) {
                         items(
                             count = users.itemCount,
-                            key = users.itemKey { user -> user }) { index ->
-                            users[index]?.let { habit ->
-
+                            key = users.itemKey { user -> user.id }) { index ->
+                            users[index]?.let { user ->
+                                UserItem(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(Colors.backgroundPrimary()),
+                                    user = user
+                                )
                             }
                         }
 
@@ -77,7 +88,7 @@ fun UsersContainer(
                         }
                     } else {
                         item {
-
+                            UsersPlaceholder()
                         }
                     }
                 }

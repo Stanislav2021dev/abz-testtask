@@ -10,6 +10,7 @@ import com.abzagency.features.users.models.presentation.toPresentationModel
 import com.nanohabits.core.common.dispatchers.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,6 +38,9 @@ class UsersViewModel @Inject constructor(
 
     private fun getUsersFromRemote() {
         viewModelScope.launch(coroutineDispatcher) {
+            // Delay for shimmers
+            delay(1000)
+
             _uiState.update { uiState ->
                 uiState.copy(
                     users = getUsersFromRemoteUseCase().map { pagingData ->

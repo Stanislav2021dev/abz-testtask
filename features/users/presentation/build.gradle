@@ -46,6 +46,9 @@ dependencies {
     implementation libs.pagingDependencies.core
     implementation libs.pagingDependencies.compose
 
+    // Coil
+    implementation libs.composeCoil.core
+
     // Local modules
     implementation project(":core:designsystem")
     implementation project(":core:common")

@@ -1,7 +1,6 @@
-package com.abzagency.core.designsystem.ui
+package com.abzagency.core.designsystem.ui.paging
 
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember

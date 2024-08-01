@@ -29,4 +29,9 @@ dependencies {
     implementation libs.composeDependencies.composeUi
     implementation libs.composeDependencies.composePreview
     implementation libs.composeDependencies.composeMaterial3
+
+    implementation libs.androidCoreDependencies.appcompat
+
+    // Placeholder
+    implementation libs.composePlaceholder.core
 }

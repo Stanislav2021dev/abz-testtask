@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header_title">Working with GET request</string>
+    <string name="empty_state_title">There are no users yet</string>
+</resources>

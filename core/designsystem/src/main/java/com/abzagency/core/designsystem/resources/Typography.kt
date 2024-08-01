@@ -15,11 +15,32 @@ object Typography {
         letterSpacing = 1.5.sp
     )
 
+    val h1 = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
+        fontSize = 20.0.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 24.0.sp
+    )
+
     val bodyLarge = TextStyle(
-        fontFamily = FontFamily(Font(R.font.nutino_sans)),
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
         fontSize = 16.0.sp,
         fontWeight = FontWeight(600),
         lineHeight = 24.0.sp,
         letterSpacing = 0.1.sp
+    )
+
+    val body2 = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
+        fontSize = 18.0.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 24.0.sp
+    )
+
+    val body3 = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
+        fontSize = 14.0.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 20.0.sp
     )
 }
