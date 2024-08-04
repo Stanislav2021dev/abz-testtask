@@ -30,9 +30,23 @@ object Typography {
         letterSpacing = 0.1.sp
     )
 
-    val body2 = TextStyle(
+    val body1 = TextStyle(
         fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
         fontSize = 18.0.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 24.0.sp
+    )
+
+    val body1SemiBold = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_semi_bold)),
+        fontSize = 18.0.sp,
+        fontWeight = FontWeight(600),
+        lineHeight = 24.0.sp
+    )
+
+    val body2 = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
+        fontSize = 16.0.sp,
         fontWeight = FontWeight(400),
         lineHeight = 24.0.sp
     )
@@ -42,5 +56,11 @@ object Typography {
         fontSize = 14.0.sp,
         fontWeight = FontWeight(400),
         lineHeight = 20.0.sp
+    )
+
+    val bodySmall = TextStyle(
+        fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
+        fontSize = 16.0.sp,
+        fontWeight = FontWeight(400)
     )
 }

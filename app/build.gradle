@@ -57,4 +57,5 @@ dependencies {
     implementation project(":features:users:presentation")
     implementation project(":features:users:data")
     implementation project(":features:signup:presentation")
+    implementation project(":features:signup:data")
 }

@@ -17,5 +17,5 @@ android {
 }
 
 dependencies {
-implementation project(':features:users:models:domain')
+    implementation project(":features:users:models:domain")
 }

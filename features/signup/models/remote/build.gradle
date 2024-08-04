@@ -1,0 +1,16 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+dependencies {
+    // Kotlin serialization
+    implementation libs.kotlinDependencies.serialization
+
+    // Retrofit
+    implementation libs.networkDependencies.retrofit
+    implementation libs.networkDependencies.okHttp
+
+    // Local modules
+    implementation project(':features:signup:models:domain')
+}

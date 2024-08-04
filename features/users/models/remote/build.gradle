@@ -6,5 +6,7 @@ plugins {
 dependencies {
     // Kotlin serialization
     implementation libs.kotlinDependencies.serialization
-    implementation project(':features:users:models:domain')
+
+    // Local modules
+    implementation project(":features:users:models:domain")
 }

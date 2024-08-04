@@ -23,9 +23,11 @@ dependencies {
 
     // Hilt
     implementation libs.hiltDependencies.hilt
-    implementation project(':features:users:models:domain')
     kapt libs.hiltDependencies.kapt
 
     // Paging
     implementation libs.pagingDependencies.core
+
+    // Local modules
+    implementation project(":features:users:models:domain")
 }

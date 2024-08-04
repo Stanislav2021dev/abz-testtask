@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header_title">Working with POST request</string>
+    <string name="name_hint">Your name</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone</string>
+    <string name="phone_label">+38 (XXX) XXX - XX - XX</string>
+    <string name="select_position_title">Select your position</string>
+    <string name="upload_photo">Upload your photo</string>
+    <string name="upload_photo_btn_text">Upload</string>
+    <string name="clear_photo_btn_text">Clear</string>
+    <string name="signup_btn_text">Sign up</string>
+    <string name="photo_picker_title">Choose how you want to add a photo</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+</resources>

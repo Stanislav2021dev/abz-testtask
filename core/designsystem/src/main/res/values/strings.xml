@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="required_field_error_text">Required field</string>
+    <string name="name_is_short_error_text">The name must be at least 2 characters long</string>
+    <string name="name_is_long_error_text">The name must be less than 64 characters.</string>
+    <string name="email_error_text">Invalid email format</string>
+    <string name="phone_error_text">Invalid phone number</string>
+    <string name="photo_is_small_error_text">Minimum size of photo 70x70px</string>
+    <string name="photo_is_big_error_text">The photo size must not be greater than 5 Mb.</string>
+</resources>

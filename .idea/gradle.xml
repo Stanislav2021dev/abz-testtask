@@ -16,6 +16,12 @@
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/signup" />
+            <option value="$PROJECT_DIR$/features/signup/data" />
+            <option value="$PROJECT_DIR$/features/signup/domain" />
+            <option value="$PROJECT_DIR$/features/signup/models" />
+            <option value="$PROJECT_DIR$/features/signup/models/domain" />
+            <option value="$PROJECT_DIR$/features/signup/models/presentation" />
+            <option value="$PROJECT_DIR$/features/signup/models/remote" />
             <option value="$PROJECT_DIR$/features/signup/presentation" />
             <option value="$PROJECT_DIR$/features/splash" />
             <option value="$PROJECT_DIR$/features/splash/presentation" />

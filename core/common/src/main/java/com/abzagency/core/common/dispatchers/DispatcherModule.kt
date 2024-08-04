@@ -1,4 +1,4 @@
-package com.nanohabits.core.common.dispatchers
+package com.abzagency.core.common.dispatchers
 
 import dagger.Module
 import dagger.Provides

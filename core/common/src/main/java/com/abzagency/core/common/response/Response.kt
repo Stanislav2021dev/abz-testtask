@@ -22,7 +22,6 @@ fun <T : Any, R : Any> Response<T>.map(convert: (T) -> R): Response<R> = try {
 }
 
 object ErrorCodes {
-    const val NO_AUTHORIZED = 401
     const val INVALID_PARAMS = 422
     const val UNKNOWN_ERROR = 1024
     const val INTERNET_CONNECTION_ERROR = 1025

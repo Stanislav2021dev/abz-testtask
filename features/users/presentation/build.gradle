@@ -37,8 +37,6 @@ dependencies {
 
     // Hilt
     implementation libs.hiltDependencies.hilt
-    implementation project(':features:users:models:domain')
-
     kapt libs.hiltDependencies.kapt
     implementation libs.hiltDependencies.navigationCompose
 
@@ -55,4 +53,5 @@ dependencies {
 
     implementation project(":features:users:domain")
     implementation project(":features:users:models:presentation")
+    implementation project(":features:users:models:domain")
 }

@@ -35,3 +35,7 @@ fun Colors.textSecondary(): Color = colorResource(id = R.color.black).copy(alpha
 @Composable
 @ReadOnlyComposable
 fun Colors.dividerColor(): Color = colorResource(id = R.color.black).copy(alpha = 0.8f)
+
+@Composable
+@ReadOnlyComposable
+fun Colors.errorColor(): Color = colorResource(id = R.color.error)

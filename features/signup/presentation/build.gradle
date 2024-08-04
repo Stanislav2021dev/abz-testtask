@@ -2,10 +2,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.compiler)
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.abzagency.features.signup.presentation'
+    namespace "${packageName}.features.signup.presentation"
     compileSdk 34
 
     compileOptions {
@@ -31,4 +33,22 @@ dependencies {
     implementation libs.composeDependencies.composeMaterial3
     implementation libs.composeDependencies.composeNavigation
     implementation libs.composeDependencies.runtime
+    implementation libs.composeAccompanist.permissions
+
+    // Hilt
+    implementation libs.hiltDependencies.hilt
+
+    kapt libs.hiltDependencies.kapt
+    implementation libs.hiltDependencies.navigationCompose
+
+    // Coil
+    implementation libs.composeCoil.core
+
+    // Local modules
+    implementation project(":core:designsystem")
+    implementation project(":core:common")
+
+    implementation project(':features:signup:domain')
+    implementation project(':features:signup:models:presentation')
+    implementation project(':features:signup:models:domain')
 }

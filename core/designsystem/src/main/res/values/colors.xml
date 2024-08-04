@@ -5,4 +5,5 @@
     <color name="primary">#F4E041</color>
     <color name="secondary">#00BDD3</color>
     <color name="black">#000000</color>
+    <color name="error">#CB3D40</color>
 </resources>

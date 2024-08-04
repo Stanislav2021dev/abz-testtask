@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.abzagency.core.network'
+    namespace "${packageName}.core.network"
     compileSdk 34
 
     defaultConfig {

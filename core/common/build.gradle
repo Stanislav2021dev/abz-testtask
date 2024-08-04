@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.abzagency.core.common'
+    namespace "${packageName}.core.common"
     compileSdk 34
 
     compileOptions {

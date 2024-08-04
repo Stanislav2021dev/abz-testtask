@@ -24,8 +24,6 @@ dependencies {
 
     // Hilt
     implementation libs.hiltDependencies.hilt
-    implementation project(':features:users:models:remote')
-    implementation project(':features:users:models:domain')
     kapt libs.hiltDependencies.kapt
 
     // Retrofit
@@ -42,4 +40,6 @@ dependencies {
     implementation project(":core:network")
 
     implementation project(":features:users:domain")
+    implementation project(":features:users:models:remote")
+    implementation project(":features:users:models:domain")
 }
