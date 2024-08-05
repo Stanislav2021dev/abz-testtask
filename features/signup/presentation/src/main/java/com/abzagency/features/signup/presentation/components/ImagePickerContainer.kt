@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
+import com.abzagency.core.common.constants.Constants
 import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.Dimens
 import com.abzagency.core.designsystem.resources.Typography
@@ -115,7 +116,7 @@ fun ImagePickerContainer(
             AnimatedErrorText(error = error)
         } ?: run {
             Text(
-                text = "",
+                text = Constants.EMPTY_STRING,
                 style = Typography.bodySmall
             )
         }
