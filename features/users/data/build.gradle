@@ -6,7 +6,12 @@ plugins {
 
 android {
     namespace "${packageName}.features.users.data"
-    compileSdk 34
+    compileSdk gradleDependencies.compileSdk
+
+    defaultConfig {
+        minSdk gradleDependencies.minSdk
+        targetSdk gradleDependencies.targetSdk
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

@@ -1,6 +1,7 @@
 package com.abzagency.features.signup.presentation.screen
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,18 +22,23 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.abzagency.core.common.lifecycle.HandleLifecycleEvents
 import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.Dimens
 import com.abzagency.core.designsystem.resources.Typography
 import com.abzagency.core.designsystem.resources.backgroundPrimary
 import com.abzagency.core.designsystem.resources.primary
 import com.abzagency.core.designsystem.resources.textPrimary
+import com.abzagency.core.designsystem.ui.common.CommonButton
+import com.abzagency.core.designsystem.ui.common.ErrorContainer
 import com.abzagency.core.designsystem.ui.common.Header
 import com.abzagency.core.designsystem.ui.keyboard.clearFocusOnKeyboardDismiss
 import com.abzagency.core.designsystem.ui.textfield.CommonTextField
@@ -41,31 +47,70 @@ import com.abzagency.features.signup.presentation.components.ImagePicker
 import com.abzagency.features.signup.presentation.components.ImagePickerContainer
 import com.abzagency.features.signup.presentation.components.PositionContainer
 import com.abzagency.features.signup.presentation.components.PositionShimmers
+import com.abzagency.features.signup.presentation.components.SignupSuccessContainer
 import com.abzagency.features.signup.presentation.viewmodel.SignUpViewModel
 import com.abzagency.features.signup.presentation.viewmodel.SignUpViewModelState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
-@RequiresApi(Build.VERSION_CODES.KITKAT)
 @Composable
 internal fun SignUpRoute(
-    viewModel: SignUpViewModel
+    viewModel: SignUpViewModel,
+    goToUsers: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    SignUpScreen(
-        uiState = uiState,
-        onNameChange = viewModel::onNameChange,
-        onEmailChange = viewModel::onEmailChange,
-        onPhoneChange = viewModel::onPhoneChange,
-        onPositionSelect = viewModel::onPositionSelect,
-        onSignUpClick = viewModel::validateUserDataAndGetUserToken,
-        updateUploadPhotoPickerDialogVisibility = viewModel::updateUploadPhotoPickerDialogVisibility,
-        onClearPhotoClick = { viewModel.updateUserPhoto(null) },
-        updateUserPhoto = viewModel::updateUserPhoto
+    when {
+        uiState.responseErrorData != null -> {
+            ErrorContainer(
+                errorData = uiState.responseErrorData,
+                onCloseClick = {
+                    viewModel.updateErrorData(null)
+                    viewModel.getUserPositionsFromRemote()
+
+                },
+                onRetryClick = {
+                    viewModel.updateErrorData(null)
+                    viewModel.getUserPositionsFromRemote()
+                }
+            )
+        }
+
+        uiState.showSignupSuccess -> {
+            SignupSuccessContainer(
+                onProceedClick = {
+                    goToUsers()
+                    viewModel.updateSignupSuccess(false)
+                }
+            )
+        }
+
+        else -> {
+            SignUpScreen(
+                uiState = uiState,
+                onNameChange = viewModel::onNameChange,
+                onEmailChange = viewModel::onEmailChange,
+                onPhoneChange = viewModel::onPhoneChange,
+                onPositionSelect = viewModel::onPositionSelect,
+                onSignUpClick = viewModel::validateUserDataAndGetUserToken,
+                updateUploadPhotoPickerDialogVisibility = viewModel::updateUploadPhotoPickerDialogVisibility,
+                onClearPhotoClick = { viewModel.updateUserPhoto(null) },
+                updateUserPhoto = viewModel::updateUserPhoto
+            )
+        }
+    }
+
+    HandleLifecycleEvents(
+        lifecycleOwner = LocalLifecycleOwner.current,
+        onStart = {
+            if (uiState.userPositions.isEmpty()) {
+                viewModel.getUserPositionsFromRemote()
+            }
+        }
     )
 }
 
-@RequiresApi(Build.VERSION_CODES.KITKAT)
 @Composable
 internal fun SignUpScreen(
     uiState: SignUpViewModelState,
@@ -104,7 +149,7 @@ internal fun SignUpScreen(
         ) {
             CommonTextField(
                 modifier = Modifier.clearFocusOnKeyboardDismiss(),
-                value = uiState.name.orEmpty(),
+                value = uiState.name,
                 hint = stringResource(id = R.string.name_hint),
                 onValueChange = onNameChange,
                 error = uiState.nameError
@@ -114,7 +159,7 @@ internal fun SignUpScreen(
 
             CommonTextField(
                 modifier = Modifier.clearFocusOnKeyboardDismiss(),
-                value = uiState.email.orEmpty(),
+                value = uiState.email,
                 hint = stringResource(id = R.string.email_hint),
                 onValueChange = onEmailChange,
                 error = uiState.emailError
@@ -124,7 +169,7 @@ internal fun SignUpScreen(
 
             CommonTextField(
                 modifier = Modifier.clearFocusOnKeyboardDismiss(),
-                value = uiState.phone.orEmpty(),
+                value = uiState.phone,
                 hint = stringResource(id = R.string.phone_hint),
                 onValueChange = onPhoneChange,
                 error = uiState.phoneError,
@@ -147,13 +192,11 @@ internal fun SignUpScreen(
                 }
             } else {
                 uiState.userPositions.forEach { position ->
-                    uiState.selectedPositionId?.let { id ->
-                        PositionContainer(
-                            position = position,
-                            currentSelectedPositionId = id,
-                            onPositionSelect = onPositionSelect
-                        )
-                    }
+                    PositionContainer(
+                        position = position,
+                        currentSelectedPositionId = uiState.selectedPositionId,
+                        onPositionSelect = onPositionSelect
+                    )
                 }
             }
 
@@ -178,23 +221,13 @@ internal fun SignUpScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Button(
-                    modifier = Modifier.width(Dimens.buttonWidth),
+                CommonButton(
+                    text = stringResource(id = R.string.signup_btn_text),
                     onClick = {
                         focusManager.clearFocus()
                         onSignUpClick()
-                    },
-                    colors = ButtonDefaults.buttonColors().copy(
-                        containerColor = Colors.primary()
-                    )
-                ) {
-                    Text(
-                        modifier = Modifier.padding(vertical = Dimens.spacingNormalSpecial),
-                        text = stringResource(id = R.string.signup_btn_text),
-                        color = Colors.textPrimary(),
-                        style = Typography.body1SemiBold
-                    )
-                }
+                    }
+                )
             }
 
             Spacer(modifier = Modifier.height(Dimens.bottomBarHeight + Dimens.spacingBig))
@@ -226,7 +259,9 @@ private fun SignUpScreenPreview() {
             isPositionsLoading = false,
             isPhotoPickerBottomSheetVisible = false,
             userPhoto = null,
-            photoError = null
+            photoError = null,
+            responseErrorData = null,
+            showSignupSuccess = false
         )
     )
 }

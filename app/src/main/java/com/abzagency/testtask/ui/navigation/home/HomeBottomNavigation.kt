@@ -17,6 +17,7 @@ import com.abzagency.testtask.ui.navigation.navhost.BaseNavHost
 import com.abzagency.testtask.ui.route.bottomnavigation.BottomBarScaffold
 import com.abzagency.testtask.ui.route.bottomnavigation.BottomNavItem
 import com.abzagency.core.designsystem.R
+import com.abzagency.testtask.ui.route.bottomnavigation.navigateToTab
 
 fun NavGraphBuilder.homeGraph(rootRoute: String) {
     composable(rootRoute) {
@@ -41,13 +42,19 @@ fun BottomNavigationNavHost(
         startDestination = HomeDestination.SIGN_UP.route
     ) {
         signUpTabGraph(
-            HomeDestination.SIGN_UP.route,
-            showBottomBar
+            rootRoute = HomeDestination.SIGN_UP.route,
+            showBottomBar = showBottomBar,
+            goToUsers = {
+                navigateToTab(
+                    navController = navController,
+                    route = HomeDestination.USERS.route
+                )
+            }
         )
 
         usersTabGraph(
-            HomeDestination.USERS.route,
-            showBottomBar
+            rootRoute = HomeDestination.USERS.route,
+            showBottomBar = showBottomBar
         )
     }
 }

@@ -13,4 +13,6 @@
     <string name="photo_picker_title">Choose how you want to add a photo</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="success_title">User successfully registered</string>
+    <string name="success_proceed_btn_text">Got it</string>
 </resources>

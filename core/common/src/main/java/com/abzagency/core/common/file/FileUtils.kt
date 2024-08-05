@@ -1,4 +1,4 @@
-package com.abzagency.features.signup.presentation.utils
+package com.abzagency.core.common.file
 
 import android.content.Context
 import android.net.Uri

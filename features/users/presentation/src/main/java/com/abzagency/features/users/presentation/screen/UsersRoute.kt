@@ -10,9 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.abzagency.core.common.response.ErrorData
 import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.backgroundPrimary
+import com.abzagency.core.designsystem.ui.common.ErrorContainer
 import com.abzagency.core.designsystem.ui.common.Header
 import com.abzagency.features.users.presentation.components.UsersContainer
 import com.abzagency.features.users.presentation.viewmodel.UsersViewModel
@@ -41,9 +44,25 @@ internal fun UsersScreen(
             .systemBarsPadding()
             .background(Colors.backgroundPrimary())
     ) {
-        Header(title = stringResource(id = R.string.header_title))
+       val users = uiState.users.collectAsLazyPagingItems()
 
-        UsersContainer(users = uiState.users.collectAsLazyPagingItems())
+        val errorState = when {
+            users.loadState.prepend is LoadState.Error -> users.loadState.prepend as LoadState.Error
+            users.loadState.refresh is LoadState.Error -> users.loadState.refresh as LoadState.Error
+            else -> null
+        }
+
+        if (errorState != null) {
+            ErrorContainer(
+                errorData = errorState.error as ErrorData,
+                onCloseClick = { users.retry() },
+                onRetryClick = { users.retry() }
+            )
+        } else {
+            Header(title = stringResource(id = R.string.header_title))
+
+            UsersContainer(users = users)
+        }
     }
 }
 

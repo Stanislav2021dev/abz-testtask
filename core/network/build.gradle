@@ -7,7 +7,12 @@ plugins {
 
 android {
     namespace "${packageName}.core.network"
-    compileSdk 34
+    compileSdk gradleDependencies.compileSdk
+
+    defaultConfig {
+        minSdk gradleDependencies.minSdk
+        targetSdk gradleDependencies.targetSdk
+    }
 
     defaultConfig {
         buildConfigField "String", "BASE_URL1", "\"https://frontend-test-assignment-api.abz.agency/\""

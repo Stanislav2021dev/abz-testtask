@@ -2,7 +2,6 @@ package com.abzagency.features.signup.presentation.components
 
 import android.Manifest
 import android.os.Build
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,15 +9,14 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.FileProvider
-import com.abzagency.features.signup.presentation.utils.FileUtils
-import com.abzagency.features.signup.presentation.utils.FileUtils.createTempPhotoFile
-import com.abzagency.features.signup.presentation.utils.FileUtils.getFileFromUri
+import com.abzagency.core.common.file.FileUtils
+import com.abzagency.core.common.file.FileUtils.createTempPhotoFile
+import com.abzagency.core.common.file.FileUtils.getFileFromUri
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import java.io.File
 
-@RequiresApi(Build.VERSION_CODES.KITKAT)
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun ImagePicker(
@@ -39,7 +37,6 @@ fun ImagePicker(
             contract = ActivityResultContracts.TakePicture()
         ) {
             onResult(tempPhotoFile)
-            Log.d("TESTTT", "ImagePicker: ${tempPhotoFile.path} ")
             onDismiss()
         }
 

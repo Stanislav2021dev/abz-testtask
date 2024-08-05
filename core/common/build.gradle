@@ -3,18 +3,33 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.plugin.serialization'
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace "${packageName}.core.common"
-    compileSdk 34
+    compileSdk gradleDependencies.compileSdk
+
+    defaultConfig {
+        minSdk gradleDependencies.minSdk
+        targetSdk gradleDependencies.targetSdk
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.composeCompilerVersion.get().toString()
     }
 }
 
@@ -30,4 +45,8 @@ dependencies {
     // Hilt
     implementation libs.hiltDependencies.hilt
     kapt libs.hiltDependencies.kapt
+
+    // Jetpack Compose
+    implementation libs.composeDependencies.composeUi
+    implementation libs.composeDependencies.lifecycleRuntime
 }

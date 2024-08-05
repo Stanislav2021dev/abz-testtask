@@ -30,9 +30,6 @@ fun UsersContainer(
     modifier: Modifier = Modifier,
     users: LazyPagingItems<UserPresentationModel>,
 ) {
-    val isLoadingError by remember(users) {
-        derivedStateOf { users.loadState.refresh is LoadState.Error }
-    }
     val isLoading by remember(users) {
         derivedStateOf { users.loadState.refresh is LoadState.Loading }
     }
@@ -43,65 +40,59 @@ fun UsersContainer(
         derivedStateOf { users.loadState.append is LoadState.Error }
     }
 
-    when {
-        isLoadingError -> {
-           // TODO add error container
-        }
+    val lazyListState = rememberLazyListState()
+    val isScrolledToEnd by lazyListState.isScrolledToEnd()
 
-        else -> {
-            val lazyListState = rememberLazyListState()
-            val isScrolledToEnd by lazyListState.isScrolledToEnd()
-
-            LazyColumn(
-                modifier = modifier.padding(horizontal = Dimens.spacingNormal),
-                verticalArrangement = Arrangement.spacedBy(Dimens.spacingBig),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                contentPadding = PaddingValues(
-                    bottom = Dimens.bottomBarHeight + Dimens.spacingBig,
-                    top = Dimens.spacingBig
-                ),
-                state = if (isLoading) rememberLazyListState() else lazyListState
-            ) {
-                if (isLoading) {
-                    items(6) {
-                        UserItemShimmers(modifier = Modifier.fillMaxWidth())
-                    }
-                } else {
-                    if (users.itemSnapshotList.items.isNotEmpty()) {
-                        items(
-                            count = users.itemCount,
-                            key = users.itemKey { user -> user.id }) { index ->
-                            users[index]?.let { user ->
-                                UserItem(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .background(Colors.backgroundPrimary()),
-                                    user = user
-                                )
-                            }
-                        }
-
-                        if (isAppendLoading) {
-                            item {
-                                CircularProgressIndicator(color = Colors.secondary())
-                            }
-                        }
-                    } else {
-                        item {
-                            UsersPlaceholder()
-                        }
+    LazyColumn(
+        modifier = modifier.padding(horizontal = Dimens.spacingNormal),
+        verticalArrangement = Arrangement.spacedBy(Dimens.spacingBig),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        contentPadding = PaddingValues(
+            bottom = Dimens.bottomBarHeight + Dimens.spacingBig,
+            top = Dimens.spacingBig
+        ),
+        state = if (isLoading) rememberLazyListState() else lazyListState
+    ) {
+        if (isLoading) {
+            items(6) {
+                UserItemShimmers(modifier = Modifier.fillMaxWidth())
+            }
+        } else {
+            if (users.itemSnapshotList.items.isNotEmpty()) {
+                items(
+                    count = users.itemCount,
+                    key = users.itemKey { user -> user.id }) { index ->
+                    users[index]?.let { user ->
+                        UserItem(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Colors.backgroundPrimary()),
+                            user = user
+                        )
                     }
                 }
-            }
 
-            // Retry on error, if user scroll to end
-            LaunchedEffect(
-                isScrolledToEnd,
-                isAppendError,
-                lazyListState.isScrollInProgress
-            ) {
-                if (isScrolledToEnd && isAppendError && lazyListState.isScrollInProgress) users.retry()
+                if (isAppendLoading) {
+                    item {
+                        CircularProgressIndicator(color = Colors.secondary())
+                    }
+                }
+            } else {
+                item {
+                    UsersPlaceholder()
+                }
             }
+        }
+    }
+
+    // Retry on error, if user scroll to end
+    LaunchedEffect(
+        isScrolledToEnd,
+        isAppendError,
+        lazyListState.isScrollInProgress
+    ) {
+        if (isScrolledToEnd && isAppendError && lazyListState.isScrollInProgress) {
+            users.retry()
         }
     }
 }

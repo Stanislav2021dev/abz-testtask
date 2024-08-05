@@ -3,6 +3,7 @@ package com.abzagency.core.common.presentation
 import androidx.lifecycle.ViewModel
 import com.abzagency.core.common.response.ErrorData
 import com.abzagency.core.common.response.Response
+import kotlinx.coroutines.delay
 
 suspend fun <T : Any> ViewModel.performUseCase(
     useCase: suspend () -> Response<T>,
@@ -19,9 +20,12 @@ suspend fun <T : Any> ViewModel.performUseCase(
     }
 }
 
-inline fun ViewModel.loadingTask(setLoading: (isLoading: Boolean) -> Unit, block: () -> Unit) {
+suspend inline fun loadingTask(setLoading: (isLoading: Boolean) -> Unit, block: () -> Unit) {
     try {
         setLoading(true)
+
+        delay(1000)
+
         block()
     } finally {
         setLoading(false)

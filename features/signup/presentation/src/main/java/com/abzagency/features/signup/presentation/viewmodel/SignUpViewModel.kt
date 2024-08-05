@@ -6,6 +6,7 @@ import com.abzagency.core.common.constants.Constants
 import com.abzagency.core.common.dispatchers.IoDispatcher
 import com.abzagency.core.common.presentation.loadingTask
 import com.abzagency.core.common.presentation.performUseCase
+import com.abzagency.core.common.response.ErrorData
 import com.abzagency.features.users.domain.usecases.ClearCacheDirUseCase
 import com.abzagency.features.users.domain.usecases.GetUserPositionsFromRemoteUseCase
 import com.abzagency.features.users.domain.usecases.GetUserTokenFromRemoteUseCase
@@ -19,7 +20,6 @@ import com.abzagency.features.users.models.presentation.PositionPresentationMode
 import com.abzagency.features.users.models.presentation.toPresentationModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -50,18 +50,16 @@ class SignUpViewModel @Inject constructor(
             nameError = null,
             photoError = null,
             userPositions = emptyList(),
-            isPositionsLoading = true,
+            isPositionsLoading = false,
             userPhoto = null,
-            isPhotoPickerBottomSheetVisible = false
+            isPhotoPickerBottomSheetVisible = false,
+            responseErrorData = null,
+            showSignupSuccess = false
         )
     )
     val uiState: StateFlow<SignUpViewModelState> = _uiState
 
-    init {
-        getUserPositionsFromRemote()
-    }
-
-    private fun getUserPositionsFromRemote() {
+    fun getUserPositionsFromRemote() {
         viewModelScope.launch(coroutineDispatcher) {
             loadingTask(::setIsLoading) {
                 performUseCase(
@@ -69,9 +67,6 @@ class SignUpViewModel @Inject constructor(
                         getPUserPositionsFromRemoteUseCase()
                     },
                     success = { positions ->
-                        // Delay for shimmers
-                        delay(1000)
-
                         _uiState.update { uiState ->
                             uiState.copy(
                                 userPositions = positions.map { it.toPresentationModel() },
@@ -81,8 +76,8 @@ class SignUpViewModel @Inject constructor(
                             )
                         }
                     },
-                    error = {
-
+                    error = { errorData ->
+                        updateErrorData(errorData)
                     }
                 )
             }
@@ -165,7 +160,7 @@ class SignUpViewModel @Inject constructor(
                     nameValidationData.isValid &&
                     photoValidationData.isValid &&
                     phoneValidationData.isValid &&
-                    this.selectedPositionId != null
+                    this.selectedPositionId != Constants.undefinedInt
         }
     }
 
@@ -178,35 +173,38 @@ class SignUpViewModel @Inject constructor(
                 success = { token ->
                     signUpUser(token)
                 },
-                error = {
-                    // TODO add handling errors
+                error = { errorData ->
+                    updateErrorData(errorData)
                 }
             )
         }
     }
 
     private fun signUpUser(token: String) {
-        viewModelScope.launch(coroutineDispatcher) {
-            performUseCase(
-                useCase = {
-                    signUpUserUseCase(
-                        token = token,
-                        signUpData = SignUpDomainModel(
-                            name = _uiState.value.name.orEmpty(),
-                            email = _uiState.value.email.orEmpty(),
-                            phone = _uiState.value.phone.orEmpty(),
-                            photo = _uiState.value.userPhoto!!,
-                            positionId = _uiState.value.selectedPositionId!!
+        _uiState.value.userPhoto?.let { photo ->
+            viewModelScope.launch(coroutineDispatcher) {
+                performUseCase(
+                    useCase = {
+                        signUpUserUseCase(
+                            token = token,
+                            signUpData = SignUpDomainModel(
+                                name = _uiState.value.name,
+                                email = _uiState.value.email,
+                                phone = _uiState.value.phone,
+                                positionId = _uiState.value.selectedPositionId,
+                                photo = photo
+                            )
                         )
-                    )
-                },
-                success = {
-                    clearUiState()
-                },
-                error = {
-                    // TODO add handling errors
-                }
-            )
+                    },
+                    success = {
+                        clearUiState()
+                        updateSignupSuccess(true)
+                    },
+                    error = { errorData ->
+                        updateErrorData(errorData)
+                    }
+                )
+            }
         }
     }
 
@@ -223,11 +221,28 @@ class SignUpViewModel @Inject constructor(
                 email = Constants.emptyString,
                 phone = Constants.emptyString,
                 userPhoto = null,
-                selectedPositionId = Constants.undefinedInt
+                selectedPositionId = Constants.undefinedInt,
+                userPositions = emptyList()
             )
         }
 
         clearCacheDirUseCase()
+    }
+
+    fun updateErrorData(errorData: ErrorData?) {
+        _uiState.update { uiState ->
+            uiState.copy(
+                responseErrorData = errorData
+            )
+        }
+    }
+
+    fun updateSignupSuccess(isSignupSuccess: Boolean) {
+        _uiState.update { uiState ->
+            uiState.copy(
+                showSignupSuccess = isSignupSuccess
+            )
+        }
     }
 }
 
@@ -244,4 +259,6 @@ data class SignUpViewModelState(
     val isPositionsLoading: Boolean,
     val isPhotoPickerBottomSheetVisible: Boolean,
     val userPhoto: File?,
+    val responseErrorData: ErrorData?,
+    val showSignupSuccess: Boolean
 )

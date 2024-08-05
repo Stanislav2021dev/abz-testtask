@@ -10,11 +10,11 @@ import javax.inject.Inject
 class ValidatePhoneUseCase @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    operator fun invoke(phone: String?): UserValidationDataDomainModel {
+    operator fun invoke(phone: String): UserValidationDataDomainModel {
         val emailPattern = Pattern.compile(PHONE_NUMBER_PATTERN)
 
         return when {
-            phone.isNullOrEmpty() -> UserValidationDataDomainModel(
+            phone.isEmpty() -> UserValidationDataDomainModel(
                 isValid = false,
                 errorMessage = context.getString(TextFieldErrors.requiredFieldErrorId)
             )

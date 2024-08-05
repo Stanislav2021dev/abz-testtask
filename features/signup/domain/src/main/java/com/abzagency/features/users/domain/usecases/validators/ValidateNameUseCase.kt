@@ -9,9 +9,9 @@ import javax.inject.Inject
 class ValidateNameUseCase @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    operator fun invoke(name: String?): UserValidationDataDomainModel =
+    operator fun invoke(name: String): UserValidationDataDomainModel =
         when {
-            name.isNullOrEmpty() ->  UserValidationDataDomainModel(
+            name.isEmpty() ->  UserValidationDataDomainModel(
                 isValid = false,
                 errorMessage = context.getString(TextFieldErrors.requiredFieldErrorId)
             )

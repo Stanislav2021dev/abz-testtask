@@ -34,9 +34,7 @@ internal class UsersPagingRemoteDataSourceImpl @Inject constructor(
                 )
             },
             error = { error ->
-                LoadResult.Error(
-                    Exception(error.message.toString())
-                )
+                LoadResult.Error(error)
             }
         )
     }

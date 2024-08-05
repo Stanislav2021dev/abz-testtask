@@ -2,13 +2,12 @@ package com.abzagency.core.network.utils
 
 import com.abzagency.core.common.response.ErrorCodes
 import com.abzagency.core.common.response.ErrorData
+import com.abzagency.core.network.R
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import okhttp3.Call
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -68,7 +67,8 @@ private fun <T : Any> createErrorFromException(e: Exception): CommonResponse.Err
             CommonResponse.Error(
                 ErrorData(
                     code = ErrorCodes.INTERNET_CONNECTION_ERROR,
-                    message = e.message
+                    message = null,
+                    messageResourceId = R.string.no_internet_exception
                 )
             )
 

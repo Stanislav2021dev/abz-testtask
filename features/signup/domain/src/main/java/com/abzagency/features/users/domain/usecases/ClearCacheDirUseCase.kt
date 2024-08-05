@@ -2,23 +2,21 @@ package com.abzagency.features.users.domain.usecases
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.File
 import javax.inject.Inject
 
 class ClearCacheDirUseCase @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     operator fun invoke() {
-        val cacheDir = context.cacheDir
-        val tempFiles = cacheDir.listFiles { _, name -> name.contains(TEMP_FILE_PREFIX) }
-
-        if (tempFiles != null) {
-            for (file in tempFiles) {
-                file.delete()
-            }
+        val pickDir = File(context.cacheDir, CAMERA_PICKER_CACHE_FOLDER)
+        if (pickDir.exists() && pickDir.isDirectory) {
+            val files = pickDir.listFiles()
+            files?.forEach { it.delete() }
         }
     }
 
     companion object {
-        private const val TEMP_FILE_PREFIX = "temp_"
+        private const val CAMERA_PICKER_CACHE_FOLDER = "image_pick"
     }
 }

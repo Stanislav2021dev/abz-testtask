@@ -7,4 +7,6 @@
     <string name="phone_error_text">Invalid phone number</string>
     <string name="photo_is_small_error_text">Minimum size of photo 70x70px</string>
     <string name="photo_is_big_error_text">The photo size must not be greater than 5 Mb.</string>
+    <string name="close_btn_content_description">Close</string>
+    <string name="retry_btn_text">Try again</string>
 </resources>

@@ -12,7 +12,8 @@ import com.abzagency.testtask.ui.navigation.navhost.BaseNavHost
 
 fun NavGraphBuilder.signUpTabGraph(
     rootRoute: String,
-    showBottomBar: (isShow: Boolean) -> Unit
+    showBottomBar: (isShow: Boolean) -> Unit,
+    goToUsers: () -> Unit
 ) {
     composable(rootRoute) {
         val navController = rememberNavController()
@@ -30,7 +31,8 @@ fun NavGraphBuilder.signUpTabGraph(
                 startDestination = startDestination
             ) {
                 signUpGraph(
-                    rootRoute = HomeDestination.SIGN_UP.route
+                    rootRoute = HomeDestination.SIGN_UP.route,
+                    goToUsers = goToUsers
                 )
             }
         }

@@ -5,7 +5,11 @@ sealed class Response<T : Any> {
     data class Error<T : Any>(val error: ErrorData) : Response<T>()
 }
 
-data class ErrorData(val code: Int?, val message: String?)
+data class ErrorData(
+    val code: Int?,
+    override val message: String?,
+    val messageResourceId: Int? = null
+): Throwable()
 
 fun <T : Any, R : Any> Response<T>.map(convert: (T) -> R): Response<R> = try {
     when (this) {
@@ -22,7 +26,6 @@ fun <T : Any, R : Any> Response<T>.map(convert: (T) -> R): Response<R> = try {
 }
 
 object ErrorCodes {
-    const val INVALID_PARAMS = 422
     const val UNKNOWN_ERROR = 1024
     const val INTERNET_CONNECTION_ERROR = 1025
     const val JSON_VALIDATION_ERROR = 1026
