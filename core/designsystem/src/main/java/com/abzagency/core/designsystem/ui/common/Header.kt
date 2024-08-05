@@ -23,8 +23,10 @@ fun Header(title: String) {
             .background(Colors.primary()),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = title,
+        Text(
+            text = title,
             color = Colors.textPrimary(),
-            style = Typography.h1)
+            style = Typography.h1
+        )
     }
 }

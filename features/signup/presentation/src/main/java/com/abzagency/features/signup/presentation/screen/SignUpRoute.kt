@@ -1,8 +1,5 @@
 package com.abzagency.features.signup.presentation.screen
 
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,16 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -35,7 +28,6 @@ import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.Dimens
 import com.abzagency.core.designsystem.resources.Typography
 import com.abzagency.core.designsystem.resources.backgroundPrimary
-import com.abzagency.core.designsystem.resources.primary
 import com.abzagency.core.designsystem.resources.textPrimary
 import com.abzagency.core.designsystem.ui.common.CommonButton
 import com.abzagency.core.designsystem.ui.common.ErrorContainer
@@ -50,8 +42,6 @@ import com.abzagency.features.signup.presentation.components.PositionShimmers
 import com.abzagency.features.signup.presentation.components.SignupSuccessContainer
 import com.abzagency.features.signup.presentation.viewmodel.SignUpViewModel
 import com.abzagency.features.signup.presentation.viewmodel.SignUpViewModelState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.io.File
 
 @Composable

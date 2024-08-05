@@ -1,7 +1,7 @@
-package com.abzagency.features.users.domain.usecases
+package com.abzagency.features.signup.domain.usecases
 
-import com.abzagency.features.users.domain.repository.SignUpRepository
-import com.abzagency.features.users.models.domain.SignUpDomainModel
+import com.abzagency.features.signup.domain.repository.SignUpRepository
+import com.abzagency.features.signup.models.domain.SignUpDomainModel
 import javax.inject.Inject
 
 class SignUpUserUseCase @Inject constructor(private val repository: SignUpRepository) {

@@ -5,7 +5,7 @@ import com.abzagency.core.common.response.ErrorData
 import com.abzagency.core.common.response.Response
 import kotlinx.coroutines.delay
 
-suspend fun <T : Any> ViewModel.performUseCase(
+suspend fun <T : Any> performUseCase(
     useCase: suspend () -> Response<T>,
     success: suspend (data: T) -> Unit,
     error: suspend (error: ErrorData) -> Unit
@@ -14,6 +14,7 @@ suspend fun <T : Any> ViewModel.performUseCase(
         is Response.Success -> {
             success(response.data)
         }
+
         is Response.Error -> {
             error(response.error)
         }
@@ -24,6 +25,7 @@ suspend inline fun loadingTask(setLoading: (isLoading: Boolean) -> Unit, block: 
     try {
         setLoading(true)
 
+        // Delay for shimmers displaying
         delay(1000)
 
         block()

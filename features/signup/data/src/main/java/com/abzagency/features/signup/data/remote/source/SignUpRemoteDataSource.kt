@@ -1,9 +1,9 @@
 package com.abzagency.features.signup.data.remote.source
 
 import com.abzagency.core.common.response.Response
-import com.abzagency.features.users.models.remote.PositionsWrapperRemoteModel
-import com.abzagency.features.users.models.remote.SignupRemoteModel
-import com.abzagency.features.users.models.remote.UserTokenRemoteModel
+import com.abzagency.features.signup.models.remote.PositionsWrapperRemoteModel
+import com.abzagency.features.signup.models.remote.SignupRemoteModel
+import com.abzagency.features.signup.models.remote.UserTokenRemoteModel
 
 internal interface SignUpRemoteDataSource {
     suspend fun getPositions(): Response<PositionsWrapperRemoteModel>

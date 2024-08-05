@@ -17,7 +17,7 @@ object FileUtils {
     }
 
     fun getFileFromUri(context: Context, uri: Uri): File? {
-      return  try {
+        return try {
             val fileName = getFileName(context, uri)
             val tempFile = File.createTempFile(fileName, null, context.cacheDir)
             val inputStream: InputStream? = context.contentResolver.openInputStream(uri)

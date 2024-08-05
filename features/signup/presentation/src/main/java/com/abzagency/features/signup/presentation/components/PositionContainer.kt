@@ -20,7 +20,7 @@ import com.abzagency.core.designsystem.resources.Typography
 import com.abzagency.core.designsystem.resources.secondary
 import com.abzagency.core.designsystem.resources.textPrimary
 import com.abzagency.features.signup.presentation.dimens.SignUpDimens
-import com.abzagency.features.users.models.presentation.PositionPresentationModel
+import com.abzagency.features.signup.models.presentation.PositionPresentationModel
 
 @Composable
 fun PositionContainer(

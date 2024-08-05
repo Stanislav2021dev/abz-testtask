@@ -14,6 +14,7 @@ abstract class RemotePagingSource<T : Any> : PagingSource<Int, T>() {
             is Response.Success -> {
                 success(result.data)
             }
+
             is Response.Error -> {
                 error(result.error)
             }

@@ -1,4 +1,4 @@
-package com.abzagency.features.users.domain.usecases
+package com.abzagency.features.signup.domain.usecases
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

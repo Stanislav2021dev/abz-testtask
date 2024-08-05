@@ -26,14 +26,14 @@ fun NavGraphBuilder.signUpTabGraph(
             }
         }
 
-            BaseNavHost(
-                navController,
-                startDestination = startDestination
-            ) {
-                signUpGraph(
-                    rootRoute = HomeDestination.SIGN_UP.route,
-                    goToUsers = goToUsers
-                )
-            }
+        BaseNavHost(
+            navController,
+            startDestination = startDestination
+        ) {
+            signUpGraph(
+                rootRoute = HomeDestination.SIGN_UP.route,
+                goToUsers = goToUsers
+            )
         }
+    }
 }

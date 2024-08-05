@@ -46,24 +46,25 @@ fun BottomBarScaffold(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (showBottomBar.value) {
-                        bottomNavItems.forEach { item ->
-                            BottomBarItem(
-                                modifier = Modifier.weight(1f),
-                                isSelected = backStackEntry.value?.destination?.route?.contains(item.route) ?: false,
-                                icon =  { color ->
-                                    item.icon(color)
-                                },
-                                text = stringResource(id = item.nameResourceId),
-                                onClick = {
-                                    navigateToTab(
-                                        navController = navController,
-                                        route = item.route
-                                    )
-                                }
-                            )
-                        }
+                    bottomNavItems.forEach { item ->
+                        BottomBarItem(
+                            modifier = Modifier.weight(1f),
+                            isSelected = backStackEntry.value?.destination?.route?.contains(item.route)
+                                ?: false,
+                            icon = { color ->
+                                item.icon(color)
+                            },
+                            text = stringResource(id = item.nameResourceId),
+                            onClick = {
+                                navigateToTab(
+                                    navController = navController,
+                                    route = item.route
+                                )
+                            }
+                        )
                     }
                 }
+            }
         }
     ) {
         content(

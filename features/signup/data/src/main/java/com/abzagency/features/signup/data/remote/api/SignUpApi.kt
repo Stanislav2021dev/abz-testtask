@@ -1,8 +1,8 @@
 package com.abzagency.features.signup.data.remote.api
 
-import com.abzagency.features.users.models.remote.PositionsWrapperRemoteModel
-import com.abzagency.features.users.models.remote.SignupRemoteModel
-import com.abzagency.features.users.models.remote.UserTokenRemoteModel
+import com.abzagency.features.signup.models.remote.PositionsWrapperRemoteModel
+import com.abzagency.features.signup.models.remote.SignupRemoteModel
+import com.abzagency.features.signup.models.remote.UserTokenRemoteModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response

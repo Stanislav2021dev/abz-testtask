@@ -1,6 +1,6 @@
-package com.abzagency.features.users.models.remote
+package com.abzagency.features.signup.models.remote
 
-import com.abzagency.features.users.models.domain.PositionDomainModel
+import com.abzagency.features.signup.models.domain.PositionDomainModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

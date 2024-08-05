@@ -1,6 +1,6 @@
-package com.abzagency.features.users.models.presentation
+package com.abzagency.features.signup.models.presentation
 
-import com.abzagency.features.users.models.domain.PositionDomainModel
+import com.abzagency.features.signup.models.domain.PositionDomainModel
 
 data class PositionPresentationModel(
     val id: Int,

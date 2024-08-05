@@ -1,6 +1,6 @@
-package com.abzagency.features.users.models.remote
+package com.abzagency.features.signup.models.remote
 
-import com.abzagency.features.users.models.domain.SignUpDomainModel
+import com.abzagency.features.signup.models.domain.SignUpDomainModel
 import java.io.File
 
 data class SignupRemoteModel(

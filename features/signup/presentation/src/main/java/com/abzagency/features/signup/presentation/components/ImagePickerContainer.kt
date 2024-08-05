@@ -1,6 +1,5 @@
 package com.abzagency.features.signup.presentation.components
 
-import android.net.Uri
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.abzagency.core.designsystem.resources.Colors
 import com.abzagency.core.designsystem.resources.Dimens

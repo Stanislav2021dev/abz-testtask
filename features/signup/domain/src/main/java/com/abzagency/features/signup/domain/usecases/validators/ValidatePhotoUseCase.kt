@@ -1,9 +1,9 @@
-package com.abzagency.features.users.domain.usecases.validators
+package com.abzagency.features.signup.domain.usecases.validators
 
 import android.content.Context
 import android.graphics.BitmapFactory
 import com.abzagency.core.designsystem.ui.textfield.TextFieldErrors
-import com.abzagency.features.users.models.domain.UserValidationDataDomainModel
+import com.abzagency.features.signup.models.domain.UserValidationDataDomainModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject

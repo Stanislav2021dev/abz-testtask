@@ -4,7 +4,7 @@ import com.abzagency.features.signup.data.remote.api.SignUpApi
 import com.abzagency.features.signup.data.remote.source.SignUpRemoteDataSource
 import com.abzagency.features.signup.data.remote.source.SignUpRemoteDataSourceImpl
 import com.abzagency.features.signup.data.repository.SignUpRepositoryImpl
-import com.abzagency.features.users.domain.repository.SignUpRepository
+import com.abzagency.features.signup.domain.repository.SignUpRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

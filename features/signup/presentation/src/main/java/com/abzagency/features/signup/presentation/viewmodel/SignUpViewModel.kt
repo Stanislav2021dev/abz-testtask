@@ -7,17 +7,17 @@ import com.abzagency.core.common.dispatchers.IoDispatcher
 import com.abzagency.core.common.presentation.loadingTask
 import com.abzagency.core.common.presentation.performUseCase
 import com.abzagency.core.common.response.ErrorData
-import com.abzagency.features.users.domain.usecases.ClearCacheDirUseCase
-import com.abzagency.features.users.domain.usecases.GetUserPositionsFromRemoteUseCase
-import com.abzagency.features.users.domain.usecases.GetUserTokenFromRemoteUseCase
-import com.abzagency.features.users.domain.usecases.SignUpUserUseCase
-import com.abzagency.features.users.domain.usecases.validators.ValidateEmailUseCase
-import com.abzagency.features.users.domain.usecases.validators.ValidateNameUseCase
-import com.abzagency.features.users.domain.usecases.validators.ValidatePhoneUseCase
-import com.abzagency.features.users.domain.usecases.validators.ValidatePhotoUseCase
-import com.abzagency.features.users.models.domain.SignUpDomainModel
-import com.abzagency.features.users.models.presentation.PositionPresentationModel
-import com.abzagency.features.users.models.presentation.toPresentationModel
+import com.abzagency.features.signup.domain.usecases.ClearCacheDirUseCase
+import com.abzagency.features.signup.domain.usecases.GetUserPositionsFromRemoteUseCase
+import com.abzagency.features.signup.domain.usecases.GetUserTokenFromRemoteUseCase
+import com.abzagency.features.signup.domain.usecases.SignUpUserUseCase
+import com.abzagency.features.signup.domain.usecases.validators.ValidateEmailUseCase
+import com.abzagency.features.signup.domain.usecases.validators.ValidateNameUseCase
+import com.abzagency.features.signup.domain.usecases.validators.ValidatePhoneUseCase
+import com.abzagency.features.signup.domain.usecases.validators.ValidatePhotoUseCase
+import com.abzagency.features.signup.models.domain.SignUpDomainModel
+import com.abzagency.features.signup.models.presentation.PositionPresentationModel
+import com.abzagency.features.signup.models.presentation.toPresentationModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,10 +41,10 @@ class SignUpViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(
         SignUpViewModelState(
-            name = Constants.emptyString,
-            email = Constants.emptyString,
-            phone = Constants.emptyString,
-            selectedPositionId = Constants.undefinedInt,
+            name = Constants.EMPTY_STRING,
+            email = Constants.EMPTY_STRING,
+            phone = Constants.EMPTY_STRING,
+            selectedPositionId = Constants.UNDEFINED_INT,
             emailError = null,
             phoneError = null,
             nameError = null,
@@ -72,7 +72,7 @@ class SignUpViewModel @Inject constructor(
                                 userPositions = positions.map { it.toPresentationModel() },
                                 selectedPositionId = if (positions.isNotEmpty()) {
                                     positions.first().id
-                                } else Constants.undefinedInt
+                                } else Constants.UNDEFINED_INT
                             )
                         }
                     },
@@ -160,7 +160,7 @@ class SignUpViewModel @Inject constructor(
                     nameValidationData.isValid &&
                     photoValidationData.isValid &&
                     phoneValidationData.isValid &&
-                    this.selectedPositionId != Constants.undefinedInt
+                    this.selectedPositionId != Constants.UNDEFINED_INT
         }
     }
 
@@ -217,11 +217,11 @@ class SignUpViewModel @Inject constructor(
     private fun clearUiState() {
         _uiState.update { uiState ->
             uiState.copy(
-                name = Constants.emptyString,
-                email = Constants.emptyString,
-                phone = Constants.emptyString,
+                name = Constants.EMPTY_STRING,
+                email = Constants.EMPTY_STRING,
+                phone = Constants.EMPTY_STRING,
                 userPhoto = null,
-                selectedPositionId = Constants.undefinedInt,
+                selectedPositionId = Constants.UNDEFINED_INT,
                 userPositions = emptyList()
             )
         }

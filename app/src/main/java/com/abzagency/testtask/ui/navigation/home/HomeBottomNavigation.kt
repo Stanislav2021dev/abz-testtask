@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeGraph(rootRoute: String) {
     composable(rootRoute) {
         BottomBarScaffold(
             bottomNavItems = bottomNavItems
-        ) {  navController, showBottomBar ->
+        ) { navController, showBottomBar ->
             BottomNavigationNavHost(
                 navController = navController,
                 showBottomBar = showBottomBar

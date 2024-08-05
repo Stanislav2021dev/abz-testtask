@@ -19,7 +19,7 @@ fun TestTaskApplicationTheme(content: @Composable () -> Unit) {
             val currentWindow = (view.context as? Activity)?.window
                 ?: throw Exception("Not in an activity - unable to get Window reference")
 
-             WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars  =
+            WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars =
                 true
 
             currentWindow.statusBarColor = statusBarColor

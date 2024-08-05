@@ -1,6 +1,5 @@
 package com.abzagency.testtask.com.abzagency.testtask.ui.route
 
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController

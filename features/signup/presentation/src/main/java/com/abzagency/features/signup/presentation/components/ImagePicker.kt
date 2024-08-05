@@ -25,7 +25,7 @@ fun ImagePicker(
 ) {
     val context = LocalContext.current
     val tempPhotoFile = createTempPhotoFile(context, ".jpeg")
-    val tempPhotoUri =  FileProvider.getUriForFile(
+    val tempPhotoUri = FileProvider.getUriForFile(
         context,
         context.packageName + FileUtils.PROVIDER_NAME,
         tempPhotoFile
