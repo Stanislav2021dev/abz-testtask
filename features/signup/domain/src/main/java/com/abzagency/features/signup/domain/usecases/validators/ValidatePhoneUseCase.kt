@@ -34,11 +34,6 @@ class ValidatePhoneUseCase @Inject constructor(
     }
 
     companion object {
-        private const val PHONE_NUMBER_PATTERN = "^\\+380[0-9]{9}$"
+        private const val PHONE_NUMBER_PATTERN = "^(\\+380|380)[0-9]{9}$"
     }
 }
-    val phoneNumberPattern = Pattern.compile("^\\+380[0-9]{9}$")
-
-    // Check if the phone number matches the pattern
-  //  return phoneNumberPattern.matcher(phoneNumber).matches()
-

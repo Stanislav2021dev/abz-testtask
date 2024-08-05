@@ -87,6 +87,7 @@ fun CommonTextField(
                     placeholder = {
                         Text(
                             text = hint,
+                            color = Colors.textSecondary(),
                             style = Typography.bodyLarge
                         )
                     },

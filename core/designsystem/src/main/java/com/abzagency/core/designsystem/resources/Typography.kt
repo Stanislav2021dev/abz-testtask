@@ -46,7 +46,7 @@ object Typography {
 
     val body2 = TextStyle(
         fontFamily = FontFamily(Font(R.font.nutino_sans_regular)),
-        fontSize = 16.0.sp,
+        fontSize = 18.0.sp,
         fontWeight = FontWeight(400),
         lineHeight = 24.0.sp
     )
